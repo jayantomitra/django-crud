@@ -1,0 +1,55 @@
+
+{% extends 'enroll/base.html' %}
+{% block content %}
+
+<div class="row">
+        <div class="col-sm-4">
+            <h4 class="alert alert-info"> Add Student to Course </h4>
+            <form action= " " method = 'POST'>
+                {% csrf_token %}
+                {{nform.as_p}}
+                <input type="submit" class="btn btn-success" value = "Add" />
+            </form>
+         </div>
+
+    <div class="col-sm-7 offset-1">
+        {% for msg in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> {{msg}} </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+      <h4 class = "text-center alert alert-info ">Students Registered for Course</h4>
+
+        {% if stureg %}
+
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+
+          {% for r in stureg %}
+          <tr>
+            <th scope="row">{{r.id}}</th>
+            <td>{{r.name_course}}</td>
+            <td>{{r.email_course}}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+      </table>
+
+    {% else %}
+
+      <h4 class = "text-center alert alert-warning "> No Records</h4>
+
+    {% endif %}
+
+        <a href="{% url 'addandshow' %}" class = "btn btn-warning btn-info"> Back to Student Registration </a>
+  </div>
+
+{% endblock content %}
